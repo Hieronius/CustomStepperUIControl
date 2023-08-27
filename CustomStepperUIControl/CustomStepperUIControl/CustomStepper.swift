@@ -55,6 +55,7 @@ final class CustomStepper: UIControl {
         default:
             break
         }
+        sendAction(for: valueChanged)
     }
             
 }
