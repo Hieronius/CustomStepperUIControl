@@ -20,22 +20,22 @@ final class CustomStepper: UIControl {
         button.setTitleColor(.black, for: .normal)
         button.setTitle("-", for: .normal)
         button.addTarget(self, action: #selector(buttonAction), for: .touchUpInside
-        return button)
+        return button
     }()
     
     private lazy var increaseButton: UIButton = {
         let button = UIButton()
         button.setTitleColor(.black, for: .normal)
-        button.setTitle("-", for: .normal)
+        button.setTitle("+", for: .normal)
         button.addTarget(self, action: #selector(buttonAction), for: .touchUpInside
-        return button)
+        return button
     }()
     
     private lazy var currentStepValueLabel: UILabel = {
         var label = UILabel()
         label.textColor = .black
         label.text = "\(currentValue)"
-        label.font = UIFont.monospaceDigitSystemFont(ofSize: 15, weight: UIFont.Weight.regular)
+        label.font = UIFont.monospacedDigitSystemFont(ofSize: 15, weight: UIFont.Weight.regular)
         return label
     }()
 }
