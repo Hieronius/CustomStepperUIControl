@@ -8,7 +8,7 @@
 import UIKit
 import SnapKit
 
-class ViewController: UIViewController {
+final class ViewController: UIViewController {
     
     // MARK: - Private Properties
     
@@ -18,6 +18,10 @@ class ViewController: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
+        setupViews()
+        setupConstraints()
+        setupStepper()
+        print("load is done")
         
     }
     
