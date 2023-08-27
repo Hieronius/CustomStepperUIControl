@@ -6,12 +6,41 @@
 //
 
 import UIKit
+import SnapKit
 
 class ViewController: UIViewController {
+    
+    // MARK: - Private Properties
+    
+    private lazy var stepperView = CustomStepper()
+    
+    // MARK: - Life Cycle
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        // Do any additional setup after loading the view.
+        
+    }
+    
+    // MARK: - Private Methods
+    
+    private func setupViews() {
+        view.backgroundColor = .white
+        view.addSubview(stepperView)
+    }
+    
+    private func setupConstraints() {
+        stepperView.snp.makeConstraints {
+            $0.centerX.centerY.equalToSuperview()
+        }
+    }
+    
+    private func setupStepper() {
+        stepperView.addTarget(self, action: #selector(stepperChangedValueAction), for: .valueChanged)
+    }
+    
+    @objc private func stepperChangedValueAction(sender: CustomStepper) {
+        print(sender)
+        print(sender.currentValue)
     }
 
 
