@@ -43,6 +43,20 @@ final class CustomStepper: UIControl {
         label.font = UIFont.monospacedDigitSystemFont(ofSize: 15, weight: UIFont.Weight.regular)
         return label
     }()
+    
+    // MARK: - Initialization
+    
+    override init(frame: CGRect) {
+        super.init(frame: frame)
+        
+        setupViews()
+        setupConstraints()
+        
+    }
+    
+    required init?(coder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
+    }
                          
     // MARK: - IBActions
     
@@ -58,6 +72,30 @@ final class CustomStepper: UIControl {
         sendActions(for: .valueChanged)
     }
     
+    // MARK: - Private Methods
     
+    private func setupViews() {
+        addSubview(decreaseButton)
+        addSubview(currentStepValueLabel)
+        addSubview(increaseButton)
+    }
+    
+    private func setupConstraints() {
+        decreaseButton.snp.makeConstraints {
+            $0.leading.top.bottom.equalToSuperview()
+        }
+        
+        currentStepValueLabel.snp.makeConstraints {
+            $0.top.bottom.equalToSuperview()
+            $0.leading.equalTo(decreaseButton.snp.trailing)
+        }
+        
+        increaseButton.snp.makeConstraints {
+            $0.trailing.top.bottom.equalToSuperview()
+            $0.leading.equalTo(currentStepValueLabel.snp.trailing)
+            $0.width.equalTo(decreaseButton.snp.width)
+        }
+        
+    }
             
 }

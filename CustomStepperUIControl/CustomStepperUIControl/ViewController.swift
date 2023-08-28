@@ -30,6 +30,7 @@ final class ViewController: UIViewController {
     private func setupViews() {
         view.backgroundColor = .white
         view.addSubview(stepperView)
+        
     }
     
     private func setupConstraints() {
@@ -49,4 +50,3 @@ final class ViewController: UIViewController {
 
 
 }
-
