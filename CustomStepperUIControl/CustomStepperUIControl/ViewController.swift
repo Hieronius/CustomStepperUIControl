@@ -40,6 +40,8 @@ final class ViewController: UIViewController {
     }
     
     private func setupStepper() {
+        stepperView.layer.cornerRadius = 15
+        stepperView.backgroundColor = .lightGray.withAlphaComponent(0.1)
         stepperView.addTarget(self, action: #selector(stepperChangedValueAction), for: .valueChanged)
     }
     
