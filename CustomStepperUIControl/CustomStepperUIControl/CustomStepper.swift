@@ -22,25 +22,27 @@ final class CustomStepper: UIControl {
     
     private lazy var decreaseButton: UIButton = {
         let button = UIButton()
-        button.setTitleColor(.black, for: .normal)
+        button.setTitleColor(.gray, for: .normal)
         button.setTitle("-", for: .normal)
+        button.titleLabel?.font = UIFont.systemFont(ofSize: 20)
         button.addTarget(self, action: #selector(buttonAction), for: .touchUpInside)
         return button
     }()
     
     private lazy var increaseButton: UIButton = {
         let button = UIButton()
-        button.setTitleColor(.black, for: .normal)
+        button.setTitleColor(.gray, for: .normal)
         button.setTitle("+", for: .normal)
+        button.titleLabel?.font = UIFont.systemFont(ofSize: 20)
         button.addTarget(self, action: #selector(buttonAction), for: .touchUpInside)
         return button
     }()
     
     private lazy var currentStepValueLabel: UILabel = {
         var label = UILabel()
-        label.textColor = .black
+        label.textColor = .gray
         label.text = "\(currentValue)"
-        label.font = UIFont.monospacedDigitSystemFont(ofSize: 15, weight: UIFont.Weight.regular)
+        label.font = UIFont.monospacedDigitSystemFont(ofSize: 20, weight: UIFont.Weight.regular)
         return label
     }()
     
@@ -87,12 +89,12 @@ final class CustomStepper: UIControl {
         
         currentStepValueLabel.snp.makeConstraints {
             $0.top.bottom.equalToSuperview()
-            $0.leading.equalTo(decreaseButton.snp.trailing)
+            $0.leading.equalTo(decreaseButton.snp.trailing).offset(10)
         }
         
         increaseButton.snp.makeConstraints {
             $0.trailing.top.bottom.equalToSuperview()
-            $0.leading.equalTo(currentStepValueLabel.snp.trailing)
+            $0.leading.equalTo(currentStepValueLabel.snp.trailing).offset(10)
             $0.width.equalTo(decreaseButton.snp.width)
         }
         
