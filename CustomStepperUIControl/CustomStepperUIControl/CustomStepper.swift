@@ -50,19 +50,15 @@ final class CustomStepper: UIControl {
     
     override init(frame: CGRect) {
         super.init(frame: frame)
-        
         setupViews()
-        
         setupConstraints()
         setupStepper()
-        
-        
     }
     
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
-                         
+    
     // MARK: - IBActions
     
     @objc private func buttonAction(_ sender: UIButton) {
@@ -112,5 +108,5 @@ final class CustomStepper: UIControl {
             $0.width.equalTo(decreaseButton.snp.width)
         }
     }
-            
+    
 }
