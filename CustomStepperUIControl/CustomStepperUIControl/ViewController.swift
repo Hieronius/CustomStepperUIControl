@@ -12,7 +12,7 @@ final class ViewController: UIViewController {
     
     // MARK: - Private Properties
     
-    private lazy var stepperView = CustomStepper()
+    private lazy var stepperView = CustomLazyStepper()
     
     // MARK: - Life Cycle
     

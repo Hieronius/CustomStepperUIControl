@@ -1,13 +1,13 @@
 //
-//  CustomStepper.swift
+//  CustomStepperFuncInit.swift
 //  CustomStepperUIControl
 //
-//  Created by Арсентий Халимовский on 26.08.2023.
+//  Created by Арсентий Халимовский on 29.08.2023.
 //
 
 import UIKit
 
-final class CustomLazyStepper: UIControl {
+final class CustomStepper: UIControl {
     
     // MARK: - Public Properties
     
@@ -20,39 +20,18 @@ final class CustomLazyStepper: UIControl {
     
     // MARK: - Private Properties
     
-    private lazy var decreaseButton: UIButton = {
-        let button = UIButton()
-        button.setTitleColor(.gray, for: .normal)
-        button.setTitle("-", for: .normal)
-        button.titleLabel?.font = UIFont.systemFont(ofSize: 20)
-        button.addTarget(self, action: #selector(buttonAction), for: .touchUpInside)
-        return button
-    }()
-    
-    private lazy var increaseButton: UIButton = {
-        let button = UIButton()
-        button.setTitleColor(.gray, for: .normal)
-        button.setTitle("+", for: .normal)
-        button.titleLabel?.font = UIFont.systemFont(ofSize: 20)
-        button.addTarget(self, action: #selector(buttonAction), for: .touchUpInside)
-        return button
-    }()
-    
-    private lazy var currentStepValueLabel: UILabel = {
-        var label = UILabel()
-        label.textColor = .gray
-        label.text = "\(currentValue)"
-        label.font = UIFont.monospacedDigitSystemFont(ofSize: 20, weight: UIFont.Weight.regular)
-        return label
-    }()
+    private var decreaseButton = UIButton()
+    private var currentStepValueLabel = UILabel()
+    private var increaseButton = UIButton()
     
     // MARK: - Initialization
     
     override init(frame: CGRect) {
         super.init(frame: frame)
-        setupViews()
-        setupConstraints()
         setupStepper()
+        setupDecreaseButton()
+        setupCurrentStepValueLabel()
+        setupIncreaseButton()
     }
     
     required init?(coder: NSCoder) {
@@ -73,6 +52,11 @@ final class CustomLazyStepper: UIControl {
         sendActions(for: .valueChanged)
     }
     
+    @objc private func stepperChangedValueAction(sender: CustomStepper) {
+        print(sender)
+        print(sender.currentValue)
+    }
+    
     // MARK: - Private Methods
     
     private func setupStepper() {
@@ -81,26 +65,39 @@ final class CustomLazyStepper: UIControl {
         self.addTarget(self, action: #selector(stepperChangedValueAction), for: .valueChanged)
     }
     
-    @objc private func stepperChangedValueAction(sender: CustomLazyStepper) {
-        print(sender)
-        print(sender.currentValue)
-    }
-    
-    private func setupViews() {
+    private func setupDecreaseButton() {
+        decreaseButton.setTitleColor(.gray, for: .normal)
+        decreaseButton.setTitle("-", for: .normal)
+        decreaseButton.titleLabel?.font = UIFont.systemFont(ofSize: 20)
+        decreaseButton.addTarget(self, action: #selector(buttonAction), for: .touchUpInside)
+        
         self.addSubview(decreaseButton)
-        self.addSubview(currentStepValueLabel)
-        self.addSubview(increaseButton)
-    }
-    
-    private func setupConstraints() {
+        
         decreaseButton.snp.makeConstraints {
             $0.leading.top.bottom.equalToSuperview()
         }
+    }
+    
+    private func setupCurrentStepValueLabel() {
+        currentStepValueLabel.textColor = .gray
+        currentStepValueLabel.text = "\(currentValue)"
+        currentStepValueLabel.font = UIFont.monospacedDigitSystemFont(ofSize: 20, weight: UIFont.Weight.regular)
+        
+        self.addSubview(currentStepValueLabel)
         
         currentStepValueLabel.snp.makeConstraints {
             $0.top.bottom.equalToSuperview()
             $0.leading.equalTo(decreaseButton.snp.trailing).offset(10)
         }
+    }
+    
+    private func setupIncreaseButton() {
+        increaseButton.setTitleColor(.gray, for: .normal)
+        increaseButton.setTitle("+", for: .normal)
+        increaseButton.titleLabel?.font = UIFont.systemFont(ofSize: 20)
+        increaseButton.addTarget(self, action: #selector(buttonAction), for: .touchUpInside)
+        
+        self.addSubview(increaseButton)
         
         increaseButton.snp.makeConstraints {
             $0.trailing.top.bottom.equalToSuperview()
@@ -108,5 +105,4 @@ final class CustomLazyStepper: UIControl {
             $0.width.equalTo(decreaseButton.snp.width)
         }
     }
-    
 }
