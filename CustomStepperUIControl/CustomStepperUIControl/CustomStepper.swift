@@ -11,7 +11,7 @@ final class CustomStepper: UIControl {
     
     // MARK: - Public Properties
     
-    var currentValue = 1 {
+    var currentValue = 0 {
         didSet {
             currentValue = currentValue > 0 ? currentValue : 0
             currentStepValueLabel.text = "\(currentValue)"
@@ -52,7 +52,10 @@ final class CustomStepper: UIControl {
         super.init(frame: frame)
         
         setupViews()
+        
         setupConstraints()
+        setupStepper()
+        
         
     }
     
@@ -76,10 +79,21 @@ final class CustomStepper: UIControl {
     
     // MARK: - Private Methods
     
+    private func setupStepper() {
+        self.layer.cornerRadius = 15
+        self.backgroundColor = .lightGray.withAlphaComponent(0.1)
+        self.addTarget(self, action: #selector(stepperChangedValueAction), for: .valueChanged)
+    }
+    
+    @objc private func stepperChangedValueAction(sender: CustomStepper) {
+        print(sender)
+        print(sender.currentValue)
+    }
+    
     private func setupViews() {
-        addSubview(decreaseButton)
-        addSubview(currentStepValueLabel)
-        addSubview(increaseButton)
+        self.addSubview(decreaseButton)
+        self.addSubview(currentStepValueLabel)
+        self.addSubview(increaseButton)
     }
     
     private func setupConstraints() {
@@ -97,7 +111,6 @@ final class CustomStepper: UIControl {
             $0.leading.equalTo(currentStepValueLabel.snp.trailing).offset(10)
             $0.width.equalTo(decreaseButton.snp.width)
         }
-        
     }
             
 }

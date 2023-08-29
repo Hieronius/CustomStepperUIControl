@@ -15,14 +15,12 @@ final class ViewController: UIViewController {
     private lazy var stepperView = CustomStepper()
     
     // MARK: - Life Cycle
-
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         setupViews()
         setupConstraints()
-        setupStepper()
         print("load is done")
-        
     }
     
     // MARK: - Private Methods
@@ -39,16 +37,4 @@ final class ViewController: UIViewController {
         }
     }
     
-    private func setupStepper() {
-        stepperView.layer.cornerRadius = 15
-        stepperView.backgroundColor = .lightGray.withAlphaComponent(0.1)
-        stepperView.addTarget(self, action: #selector(stepperChangedValueAction), for: .valueChanged)
-    }
-    
-    @objc private func stepperChangedValueAction(sender: CustomStepper) {
-        print(sender)
-        print(sender.currentValue)
-    }
-
-
 }
